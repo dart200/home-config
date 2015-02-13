@@ -1,0 +1,19 @@
+#!/bin/bash
+
+#$1 is the package dir to default to
+goto_src()
+{
+    if [ -z "$1" ] ; then 
+	echo "cd /local/nks/nks/src; s chroot"
+    else
+	local pkg=$1
+	echo "cd /local/nks/nks/src; s chroot -d $pkg"
+    fi
+}
+
+WIN_NAME=$1
+WIN_DIR=$2
+
+tmux new-window -n "$WIN_NAME" "$(goto_src $WIN_DIR)"
+tmux splitw -t "$WIN_NAME" -h -p 60 "$(goto_src $WIN_DIR)"
+tmux splitw -t "$WIN_NAME" -v -p 50 "$(goto_src $WIN_DIR)"

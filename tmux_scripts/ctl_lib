@@ -1,0 +1,6 @@
+#!/bin/bash
+
+tmux_cmd()
+{
+    tmux -S ~/.tmux.socket $@
+}

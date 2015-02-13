@@ -1,0 +1,35 @@
+#!/bin/bash
+
+. ~/tmux-scripts/ctl_lib
+
+MAIN_SESSION="main"
+
+if [ -z "$1" ] ; then
+    echo "please input a name for the client session"
+    exit 1
+fi
+CLIENT_SESSION=$1
+
+# creates a main session to hold all open windows so they don't
+# get deleted when you unlink one
+tmux_cmd has-session -t "$MAIN_SESSION" &> /dev/null
+HAS_SESSION=$?
+
+if [ $HAS_SESSION != 0 ] ; then
+    tmux_cmd new-session -s "$MAIN_SESSION" -c "$HOME" -n LOCAL -d
+    tmux_cmd send-keys -t $MAIN_SESSION "/$HOME/tmux-scripts/main_setup" C-m
+    sleep 2
+fi
+
+# creates a client session to link and unlink windows from.
+# in startup it by default links all windows from the main session
+tmux_cmd has-session -t "$CLIENT_SESSION" &> /dev/null
+HAS_SESSION=$?
+
+if [ $HAS_SESSION != 0 ] ; then
+    tmux_cmd new-session -s "$CLIENT_SESSION" -c "$HOME" -n LOCAL -d
+    tmux_cmd send-keys -t "$CLIENT_SESSION:0"   \
+	"$HOME/tmux-scripts/dup-windows" Space "$MAIN_SESSION" Space "$CLIENT_SESSION" C-m
+fi
+
+tmux_cmd attach -t "$CLIENT_SESSION"

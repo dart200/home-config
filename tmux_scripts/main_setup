@@ -1,0 +1,11 @@
+#!/bin/bash
+
+. $HOME/tmux-scripts/internal_lib
+
+tmux new-window -n "CMD" -c $HOME
+
+$HOME/tmux-scripts/new_window_src '2015.nks-KERNEL' 'dfs-server'
+$HOME/tmux-scripts/new_window_test '2015.nks-KERNEL' 'dfs-server' 'dfs-server-build'
+$HOME/tmux-scripts/new_window_test '2015.nks-KERNEL' 'vm-tests' 'dfs-server-vm'
+$HOME/tmux-scripts/new_window_test '2015.nks-KERNEL' 'appliance-clustest' 'clustest'
+#$HOME/tmux-scripts/new_window_src 'nks' 'DfsRereplication' 'dfs-data'

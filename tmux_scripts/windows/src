@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# Generates a blank window defaulting to a chrooted environment
+
+. $HOME/tmux-scripts/internal_lib
+
+WIN_PROJECT="$1"
+WIN_PKG="$2"
+WIN_NAME="$3"
+
+if [ -z $WIN_NAME ] ; then
+    WIN_NAME="$WIN_PKG"
+fi
+
+WIN_LABEL="$WIN_NAME [dev]"
+WIN_CMD="$(goto_src $WIN_PROJECT $WIN_PKG)"
+
+# catch errors from cmd generation
+if [ "$?" -eq "1" ] ; then 
+    exit 1
+fi
+
+tmux new-window -n "$WIN_LABEL" "$WIN_CMD"

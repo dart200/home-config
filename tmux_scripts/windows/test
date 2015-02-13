@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# Generates a 3 paned window for testing, all defaulting
+# to a chrooted project/packege
+
+. $HOME/tmux-scripts/internal_lib
+
+WIN_PROJECT="$1"
+WIN_PKG="$2"
+WIN_NAME="$3"
+
+if [ -z $WIN_NAME ] ; then
+    WIN_NAME="$WIN_PKG"
+fi
+
+WIN_LABEL="$WIN_NAME [t]"
+WIN_CMD="$(goto_src $WIN_PROJECT $WIN_PKG)"
+
+# catch errors from cmd generation
+if [ "$?" -eq "1" ] ; then 
+    exit 1
+fi
+
+tmux new-window -n "$WIN_LABEL" "$WIN_CMD"
+tmux splitw -t "$WIN_LABEL" -h -p 60 "$WIN_CMD"
+tmux splitw -t "$WIN_LABEL" -v -p 50 "$WIN_CMD"

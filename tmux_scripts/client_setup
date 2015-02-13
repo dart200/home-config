@@ -1,0 +1,16 @@
+#!/bin/bash
+
+MAIN_SESSION=$1
+CLIENT_SESSION=$2
+
+if [ -z "$MAIN_SESSION" ] ; then
+    echo "please provide main session"
+    exit 1
+fi
+
+if [ -z "$CLIENT_SESSION" ] ; then
+    echo "please provide client session"
+    exit 1
+fi
+
+$HOME/tmux-scripts/dup-windows $MAIN_SESSION $CLIENT_SESSION

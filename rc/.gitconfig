@@ -1,0 +1,17 @@
+[color]
+	ui = true
+[sendemail]
+	smtpencryption = tls
+	smtpserver = smtp.gmail.com
+	smtpuser = nks@daterainc.com
+	smtpserverport = 587
+[user]
+	name = Nicholas Swenson
+	email = nks@daterainc.com
+[core]
+	excludesfile = /home/nks/.gitignore_global
+	whitespace=indent-with-non-tab,trailing-space
+	editor = vim
+	preloadindex = true
+[push]
+	default = current

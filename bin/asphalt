@@ -1,0 +1,10 @@
+#!/bin/bash
+
+file=$1
+
+if [ ! -e "$file" ] ; then
+    echo "'$file' not found"
+fi
+
+size=`du -sb $file | cut -f 1`
+tar cf - $file | pv -p -s ${size} | bzip2 -c > ${file}.tar.bz2

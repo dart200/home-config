@@ -1,0 +1,29 @@
+#!/bin/bash
+
+MAIN_SESSION=$1
+CLIENT_SESSION=$2
+
+if [ -z "$MAIN_SESSION" ] ; then
+    echo "please provide main session to duplicate from"
+    exit 1
+fi
+
+if [ -z "$CLIENT_SESSION" ] ; then
+    echo "please provide client session to duplicate from"
+    exit 1
+fi
+
+attach_windows() {
+       
+    _attach() {
+	if [ "$2" -ne 0 ] ; then
+	    tmux link-window -dk -s "$MAIN_SESSION:$2" -t "$CLIENT_SESSION:$2"
+	fi
+    }
+     
+    tmux -S /home/nks/.tmux.socket list-windows -t $MAIN_SESSION | \
+	grep -oP "^[0-9]+(?=:)"					 | \
+	mapfile -tc1 -C _attach
+}
+
+attach_windows

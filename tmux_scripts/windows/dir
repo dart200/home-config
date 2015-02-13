@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# Generates a blank window defaulting home
+
+. $HOME/tmux-scripts/internal_lib
+
+WIN_DIR="$1"
+if [ ! -d "$WIN_DIR" ] ; then
+    exit 1
+fi
+
+WIN_NAME="$2"
+if [ -z $WIN_NAME ] ; then
+    WIN_NAME="CMD"
+fi
+
+tmux new-window -n "$WIN_NAME" -c "$WIN_DIR"

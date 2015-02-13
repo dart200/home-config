@@ -1,0 +1,46 @@
+#!/bin/bash
+#
+# tmux-new-window test
+
+die()
+{
+    echo "$1" 1>&2
+    exit 1
+}
+
+if [ -z $TMUX ] ; then
+    die "must running withing a tmux context"    
+fi
+
+MAIN_SESSION="main"
+
+WINDOW_TYPE=$1; shift
+if [ -z "$WINDOW_TYPE" ] ; then
+    die "please give window type"
+fi
+
+WINDOW_SCRIPT="/$HOME/tmux-scripts/windows/$WINDOW_TYPE"
+if [ ! -e "$WINDOW_SCRIPT" ] ; then
+    die "$WINDOW_TYPE is an invalid window type"
+fi
+
+# replace all blanks with Space commands so window args get passed properly
+REMOTE_CMD="$WINDOW_SCRIPT $@"
+REMOTE_CMD=${REMOTE_CMD// / Space }
+
+LOCAL_CMD="tmux send-keys -t \"$MAIN_SESSION:0\" $REMOTE_CMD C-m"
+eval "$LOCAL_CMD"
+sleep 1
+
+delayed_link () 
+{
+    sleep 1 
+    NEW_WIN_NUM="$(tmux list-windows -t $MAIN_SESSION | grep '*' | grep -oP '^[0-9]+\(?=:\)')"
+    tmux link-window -dk -s "$MAIN_SESSION:$NEW_WIN_NUM" -t "$CLIENT_SESSION:$NEW_WIN_NUM"
+}
+
+# if we aren't running the main session, attach window to this session
+CLIENT_SESSION="$(tmux display-message -p '#S')"
+if [ "$CLIENT_SESSION" != "$MAIN_SESSION" ] ; then
+    delayed_link &
+fi

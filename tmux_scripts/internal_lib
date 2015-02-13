@@ -1,0 +1,31 @@
+#!/bin/bash 
+
+die()
+{
+    echo "$1" 1>&2
+    exit 1
+}
+
+#$1 is the project-name for chroot
+#$2 is pkg to new splits will default too
+goto_src()
+{
+    local project=$1
+    local pkg=$2
+
+    if [ -z "$project" ] ; then
+	die "window run command must be passed a project"
+    fi
+
+    if [ ! -e "/local/nks/$project" ] ; then
+	die "project directory for $project doesn't exist"
+    fi
+
+    if [ -z "$pkg" ] ; then 
+	echo "cd /local/nks/$project/src; s chroot"
+    else
+	echo "cd /local/nks/$project/src; s chroot -d $pkg"
+    fi
+
+    return 0
+}
