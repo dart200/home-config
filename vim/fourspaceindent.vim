@@ -1,1 +1,0 @@
-/home/nks/scripts/vim/fourspaceindent.vim
