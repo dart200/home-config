@@ -28,6 +28,10 @@ set smartcase " When searching try to be smart about cases
 set showmatch " Show matching brackets when text indicator is over them
 set mat=2 " How many tenths of a second to blink when matching brackets
 
+" folding
+set foldmethod=syntax
+set foldnestmax=1
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Kent's scripts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
