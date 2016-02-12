@@ -3,11 +3,11 @@
 [sendemail]
 	smtpencryption = tls
 	smtpserver = smtp.gmail.com
-	smtpuser = nks@daterainc.com
+	smtpuser = dart200@gmail.com
 	smtpserverport = 587
 [user]
 	name = Nicholas Swenson
-	email = nks@daterainc.com
+	email = dart200@gmail.com
 [core]
 	excludesfile = /home/nks/.gitignore_global
 	whitespace=indent-with-non-tab,trailing-space
