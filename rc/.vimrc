@@ -1,4 +1,28 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Vundle
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set nocompatible              " be iMproved
+filetype off                  " required temp for vundle
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+"*** PLUGINS START ***"
+Plugin 'VundleVim/Vundle.vim' 	" let Vundle manage Vundle, required
+Plugin 'dag/vim-fish' 		" fishies!
+Plugin 'rust-lang/rust.vim'	" Rust
+Plugin 'cespare/vim-toml'	" Tom's Obvious Minimal Language
+"*** PLUGINS END ***"
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sets how many lines of history VIM has to remember
@@ -68,11 +92,11 @@ set smarttab
 set shiftwidth=4
 set tabstop=8
 
-" special kernel style settings
+"special kernel style settings
 au FileType c,cpp,h set noexpandtab
 au FileType c,h set shiftwidth=8
 
-" special styling for mdwn
+"special styling for mdwn
 au FileType markdown set noexpandtab
 au FileType markdown set shiftwidth=8
 
@@ -81,6 +105,9 @@ au FileType git* set nofoldenable
 
 "color dc files"
 au BufRead,BufNewFile *.dc set filetype=python
+
+"detect *.rs as rust file
+au BufNewFile,BufRead *.rs   set filetype=rust
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => autoreload files if changed

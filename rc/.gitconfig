@@ -1,5 +1,6 @@
 [color]
 	ui = true
+
 [sendemail]
 	smtpencryption = tls
 	smtpserver = smtp.gmail.com
@@ -9,7 +10,7 @@
 	name = Nicholas Swenson
 	email = dart200@gmail.com
 [core]
-	excludesfile = /home/nks/.gitignore_global
+	excludesfile = /home/dart200/.gitignore
 	whitespace=indent-with-non-tab,trailing-space
 	editor = vim
 	preloadindex = true
