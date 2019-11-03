@@ -90,10 +90,12 @@ set ffs=unix,dos,mac " Use Unix as the standard file type
 "set expandtab        " expand tabs
 set smarttab          
 set shiftwidth=4
-set tabstop=8
+set tabstop=4
+set softtabstop=4
+set expandtab
 
 "special kernel style settings
-au FileType c,cpp,h set noexpandtab
+au FileType c,h set noexpandtab
 au FileType c,h set shiftwidth=8
 
 "special styling for mdwn
